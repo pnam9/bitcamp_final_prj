@@ -1,0 +1,70 @@
+
+public class VisitCountDao {
+	
+	@Autowired
+	SqlSessionTemplate session;
+	
+	String ns = "Vi.";
+	
+	public int insertVisitor(VisitCountDto dto) {
+		
+		System.out.print("dao visit = " + dto);
+		return session.insert(ns+"VisitCountDao", dto);
+	}
+}
+//System.out.print("dao visit = " + dto);
+//
+//try {
+//	session.insert(ns+"VisitCountDao", dto);
+//}catch(Exception e) {
+//	e.printStackTrace();
+//}
+//
+//return 5;
+
+///////////////////////////////////////////////////////////////
+
+@Repository("VisitCountDao")
+public class VisitCountDaoImpl implements VisitCountDao {
+	
+	@Autowired
+	SqlSessionTemplate session;
+	
+	String ns = "Vi.";
+
+	@Override
+	public int insertVisitor(VisitCountDto dto) {
+		// TODO Auto-generated method stub
+		return session.insert(ns+"VisitCountDao",dto);
+	}
+
+}
+
+////////////////////////////////////////////////////////////////
+public class VisitCounter implements HttpSessionListener{
+	
+	@Bean
+	@Override
+	public void sessionCreated(HttpSessionEvent se) {
+		HttpSession session = se.getSession();
+		WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(session.getServletContext());
+		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		VisitCountDao dao = (VisitCountDao)wac.getBean("Vc");
+		VisitCountDto dto = new VisitCountDto();
+		dto.setVisit_ip(req.getRemoteAddr());
+		dto.setVisit_agent(req.getHeader("User-Agent"));
+		dao.insertVisitor(dto);
+		
+		
+		//System.out.println("sessionCreadted = " + req.getHeader("refer") );
+		
+	}
+	@Bean
+	@Override
+	public void sessionDestroyed(HttpSessionEvent se) {
+		
+	}
+
+}
+
