@@ -1,4 +1,4 @@
-<!-- # 비트캠프에서 진행한 파이널프로젝트 입니다
+# 비트캠프에서 진행한 파이널프로젝트 입니다
 프로젝트명 : YOUR (Your Own Unique Recipe)
 <br>
 기획의도 : 혼밥족들의 급증에 따라 직접 요리를 원하는 사람들에게 레시피를 제공하고 유저들이 서로 레시피를 공유하는  웹사이트를 구축하고자 하였습니다. 
@@ -15,4 +15,3 @@
 <ul>SERVER : Apache tomcat 9.0</ul>
 <ul>DATABASE : Oracle 11g</ul>
 <ul>API : KakaoMap, Summernote, Chart.js, i'mport, Smtp</ul>
- -->
